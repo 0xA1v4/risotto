@@ -1,0 +1,41 @@
+{{ define "main" }}
+    <header class="content__header">
+        <h1>{{ .Title | markdownify }}</h1>
+    </header>
+    <div class="content__body">
+        {{ .Content }}
+    </div>
+    <footer class="content__footer"></footer>
+
+    <script src="https://giscus.app/client.js"
+            data-repo="0xA1v4/0xA1v4.github.io"
+            data-repo-id="R_kgDOMkRNXA"
+            data-category="Comments"
+            data-category-id="DIC_kwDOMkRNXM4Chu3H"
+            data-mapping="pathname"
+            data-strict="1"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="noborder_gray"
+            data-lang="en"
+            crossorigin="anonymous"
+            async>
+    </script>
+{{ end }}
+
+{{define "aside" }}
+    {{ if .Params.description }}<p>{{ .Params.description }}</p>{{ end }}
+    {{ if or (.Params.author) (.Params.date) }}
+        <p>
+            {{ if .Params.author }}By {{ .Params.author }}{{ if .Date }}, {{ end }}{{ end }}
+            {{ if .Date }}{{ .Date.Format "2006-01-02" }}{{ end }}
+        </p>
+    {{ end }}
+
+    {{ if and (.Params.toc) (.TableOfContents) }}
+	    <hr>
+	    On this page:
+	    {{ .TableOfContents }}
+    {{ end }}
+{{ end }}
